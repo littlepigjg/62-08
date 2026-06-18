@@ -9,12 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "antd": "^5.12.8",
     "@ant-design/icons": "^5.2.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "antd": "^5.12.8",
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "xterm": "^5.3.0",
     "xterm-addon-fit": "^0.8.0",
     "zustand": "^4.4.7"
@@ -23,7 +23,7 @@
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
-    "typescript": "^5.3.3",
+    "typescript": "^5.9.3",
     "vite": "^5.0.10"
   }
 }

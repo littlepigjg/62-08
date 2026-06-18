@@ -38,6 +38,7 @@ import {
 import { serversApi, executeApi, templatesApi } from '@/services/api';
 import { wsService } from '@/services/websocket';
 import { useAppStore } from '@/store';
+import CommandSuggestion from '@/components/CommandSuggestion';
 import type { ServerConfig, ScriptTemplate } from '@/types';
 
 const { TextArea } = Input;
@@ -386,15 +387,11 @@ const TerminalPanel: React.FC = () => {
                     label: '单条命令',
                     children: (
                       <Space direction="vertical" style={{ width: '100%' }} size="middle">
-                        <TextArea
+                        <CommandSuggestion
                           value={command}
-                          onChange={e => setCommand(e.target.value)}
-                          placeholder="输入要执行的命令，例如：uname -a; uptime"
-                          autoSize={{ minRows: 4, maxRows: 10 }}
-                          style={{ fontFamily: 'Consolas, Monaco, monospace', fontSize: 13 }}
-                          onPressEnter={(e) => {
-                            if (e.ctrlKey || e.metaKey) handleExecute();
-                          }}
+                          onChange={setCommand}
+                          onExecute={handleExecute}
+                          placeholder="输入命令或自然语言查询，例如：帮我找出CPU占用最高的进程"
                         />
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <Space>
@@ -403,7 +400,7 @@ const TerminalPanel: React.FC = () => {
                             <Button onClick={() => setCommand('ps aux --sort=-%mem | head -10')}>Top进程</Button>
                             <Button onClick={() => setCommand('')} danger>清空</Button>
                           </Space>
-                          <Text type="secondary" style={{ fontSize: 12 }}>Ctrl+Enter 快速执行</Text>
+                          <Text type="secondary" style={{ fontSize: 12 }}>Ctrl+Enter 快速执行 | Tab 自动补全</Text>
                         </div>
                       </Space>
                     ),

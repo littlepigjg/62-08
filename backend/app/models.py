@@ -68,3 +68,34 @@ class LogEntry(BaseModel):
     end_time: Optional[str] = None
     status: str
     output: str = ""
+
+
+class SuggestionRequest(BaseModel):
+    prefix: str = ""
+    limit: int = 20
+    session_id: str = "default"
+
+
+class NlpQueryRequest(BaseModel):
+    query: str
+
+
+class FeedbackRequest(BaseModel):
+    command: str
+    useful: bool
+    reason: Optional[str] = ""
+
+
+class CommandSuggestion(BaseModel):
+    command: str
+    category: str = ""
+    score: float = 0.0
+    frequency: int = 0
+    is_history: bool = False
+    source: str = "template"
+
+
+class SuggestionResponse(BaseModel):
+    suggestions: List[CommandSuggestion]
+    total: int
+    elapsed_ms: float = 0.0

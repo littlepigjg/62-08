@@ -11,6 +11,7 @@ from ..models import (
 )
 from ..core.scheduler import scheduler
 from ..core.stream import stream_manager
+from ..core.suggestion import suggestion_engine
 
 router = APIRouter(prefix="/execute", tags=["Execute"])
 
@@ -70,6 +71,8 @@ async def execute_command(req: CommandExecuteRequest, background_tasks: Backgrou
         timeout=req.timeout,
         env=req.env,
     )
+
+    suggestion_engine.record_command(req.command)
 
     task_ids = [r.task_id for r in results]
     _register_stream_callbacks(task_ids)

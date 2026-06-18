@@ -74,3 +74,40 @@ export interface ScriptExecuteRequest {
   args?: string[];
   timeout?: number;
 }
+
+export interface CommandSuggestion {
+  command: string;
+  category: string;
+  score: number;
+  frequency: number;
+  is_history: boolean;
+  source: string;
+}
+
+export interface SuggestionResponse {
+  suggestions: CommandSuggestion[];
+  total: number;
+  elapsed_ms: number;
+}
+
+export interface FeedbackRequest {
+  command: string;
+  useful: boolean;
+  reason?: string;
+}
+
+export interface HistoryEntry {
+  command: string;
+  timestamp: string;
+  category: string;
+  exit_code: number;
+  count: number;
+}
+
+export interface UserProfile {
+  category_weights: Record<string, number>;
+  top_categories: [string, number][];
+  total_commands: number;
+  total_feedback: number;
+  negative_commands_count: number;
+}
